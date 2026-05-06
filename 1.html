@@ -172,6 +172,7 @@
             const channel = currentHost.includes('kanhaoliao.github.io') ? "2" : "1";
             const separator = redirectUrl.includes('?') ? '&' : '?';
             const finalUrl = `${redirectUrl}${separator}channel=${channel}`;
+            console.log('channel', channel);
             
             const newBtn = enterBtn.cloneNode(true);
             enterBtn.replaceWith(newBtn);
