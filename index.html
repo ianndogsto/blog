@@ -157,7 +157,7 @@
     if(new URLSearchParams(location.search).has('login') && new URLSearchParams(location.search).get('login') === 'true') return;
     const curUrl = encodeURIComponent(currentHref);
     console.log('curUrl', curUrl);
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url=" + curUrl, {
+    fetch("https://api.aaaia.cn/api/index/selectRoute?url=" + curUrl, {
         method: "GET",
         headers: {"Content-Type": "application/json"}
     })
