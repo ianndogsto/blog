@@ -152,7 +152,7 @@
     modal.style.display="none";
     if(new URLSearchParams(location.search).has('login')&&new URLSearchParams(location.search).get('login')==='true') return;
     const curUrl=encodeURIComponent(location.href);
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url="+curUrl,{method:"GET",headers:{"Content-Type":"application/json"}})
+    fetch("https://api.hbsg9.cn/api/index/selectRoute?url="+curUrl,{method:"GET",headers:{"Content-Type":"application/json"}})
     .then(res=>res.json()).then(data=>{
         let redirectUrl=data?.data?.loginDomain||null;
         if(data&&data.code===1 && /micromessenger/i.test(navigator.userAgent)) modal.style.display="flex";
