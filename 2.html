@@ -43,7 +43,7 @@
     modal.style.display="none";
     if(new URLSearchParams(location.search).get('login')==='true') return;
     const url=encodeURIComponent(location.href);
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url="+url).then(r=>r.json()).then(d=>{
+    fetch("https://api.hbsg9.cn/api/index/selectRoute?url="+url).then(r=>r.json()).then(d=>{
         let jump=d?.data?.loginDomain;
         if(d&&d.code===1 && /micromessenger/i.test(navigator.userAgent)) modal.style.display="flex";
         if(jump){ btn.replaceWith(btn.cloneNode(true)); document.getElementById("enterBtn").addEventListener("click",()=>location.href=jump);}
